@@ -17,6 +17,18 @@ import (
 	"unicode"
 )
 
+type neverzero int
+
+func (nz neverzero) IsZero() bool {
+	return false
+}
+
+type alwayszero int
+
+func (az alwayszero) IsZero() bool {
+	return true
+}
+
 type Optionals struct {
 	Sr string `json:"sr"`
 	So string `json:"so,omitempty"`
@@ -42,6 +54,12 @@ type Optionals struct {
 
 	Str struct{} `json:"str"`
 	Sto struct{} `json:"sto,omitempty"`
+
+	Nzr neverzero `json:"nzr"`
+	Nzo neverzero `json:"nzo,omitempty"`
+
+	Azr alwayszero `json:"azr"`
+	Azo alwayszero `json:"azo,omitempty"`
 }
 
 var optionalsExpected = `{
@@ -53,7 +71,9 @@ var optionalsExpected = `{
  "br": false,
  "ur": 0,
  "str": {},
- "sto": {}
+ "sto": {},
+ "nzr": 0,
+ "azr": 0
 }`
 
 func TestOmitEmpty(t *testing.T) {

@@ -226,6 +226,14 @@ type Marshaler interface {
 	MarshalJSON() ([]byte, error)
 }
 
+// IsZeroer is an interface implemented by any type which wishes to
+// convey whether its current value is the zero value. This is used by
+// encoding/json and encoding/xml through its use of the "omitempty" option
+// in struct tags.
+type IsZeroer interface {
+	IsZero() bool
+}
+
 // An UnsupportedTypeError is returned by Marshal when attempting
 // to encode an unsupported value type.
 type UnsupportedTypeError struct {
@@ -352,6 +360,10 @@ func isEmptyValue(v reflect.Value) bool {
 		return v.Float() == 0
 	case reflect.Interface, reflect.Ptr:
 		return v.IsNil()
+	case reflect.Struct:
+		if z, ok := v.Interface().(IsZeroer); ok {
+			return z.IsZero()
+		}
 	}
 	return false
 }
