@@ -4,7 +4,7 @@ Copy of Golang's json library with IsZero feature from [CL13977](https://go-revi
 
 ## Disclaimer
 
-It is a package primary used for my own projects, I will keep it up-to-date with the Go's mainline versioning.
+It is a package primary used for my own projects, I will keep it up-to-date with the mainline versioning of Go.
 
 ## Usage
 
