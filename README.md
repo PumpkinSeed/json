@@ -1,5 +1,7 @@
 # json
 
+!WARNING! This repository moved and maintained here: https://github.com/infiniteloopcloud/json
+
 Copy of Golang's json library with IsZero feature from [CL13977](https://go-review.googlesource.com/c/go/+/13977/)
 
 ## Disclaimer
